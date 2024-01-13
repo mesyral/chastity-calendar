@@ -33,6 +33,10 @@ function App() {
   const createEvent = (date, title, type, meta) => {
     if (date.toDateString() === new Date(null).toDateString()) return;
     if (date > new Date()) return;
+    if (type === 'lock' && events.filter(e => e.type === 'lock').map(e => e.start.toDateString()).includes(date.toDateString())) {
+        return
+    }
+
     const id = events.length ? Math.max(...events.map(e => e.id)) + 1 : 1;
 
     setEvents([
