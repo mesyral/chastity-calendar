@@ -5,62 +5,6 @@ import Calendar from './Calendar';
 import Navigator from './Navigator';
 import useLocalStorage from 'use-local-storage';
 
-// const evs = [
-//   {
-//     id: 1,
-//     start: new Date(2024, 0, 1),
-//     end: new Date(2024, 0, 1),
-//     created_at: new Date(),
-//     title: '🔒 已鎖',
-//     type: 'lock',
-//     locked: true,
-//   },
-//   {
-//     id: 2,
-//     start: new Date(2024, 0, 2),
-//     end: new Date(2024, 0, 2),
-//     created_at: new Date(),
-//     title: '🔓 沒鎖',
-//     type: 'lock',
-//     locked: false,
-//   },
-//   {
-//     id: 3,
-//     start: new Date(2024, 0, 3),
-//     end: new Date(2024, 0, 3),
-//     created_at: new Date(),
-//     title: '💦 射精',
-//     type: 'cum',
-//     reason: '自慰',
-//   },
-//   {
-//     id: 4,
-//     start: new Date(),
-//     end: new Date(),
-//     created_at: new Date(),
-//     title: '🔒 已鎖',
-//     type: 'lock',
-//     locked: true,
-//   },
-//   {
-//     id: 5,
-//     start: new Date(),
-//     end: new Date(),
-//     created_at: new Date(),
-//     title: '🔓 沒鎖',
-//     type: 'lock',
-//     locked: false,
-//   },
-//   {
-//     id: 6,
-//     start: new Date(),
-//     end: new Date(),
-//     created_at: new Date(),
-//     title: '💦 射精',
-//     type: 'cum',
-//     reason: '夢遺',
-//   }
-// ]
 
 const dateReviver = (k, v) => {
   switch (k) {
@@ -78,17 +22,38 @@ function App() {
   const [events, setEvents] = useState(JSON.parse(data, dateReviver))
 
 
-  // useEffect(() => {
-  //   setData(JSON.stringify(events))
-  // }, [events]);
+  useEffect(() => {
+    setData(JSON.stringify(events))
+  }, [events, setData]);
 
   const removeEvent = (e) => {
     setEvents(events.filter(ev => e.id !== ev.id))
   }
 
+  const createEvent = (date, title, type, meta) => {
+    if (date.toDateString() === new Date(null).toDateString()) return;
+    if (date > new Date()) return;
+    const id = events.length ? Math.max(...events.map(e => e.id)) + 1 : 1;
+
+    setEvents([
+      ...events,
+      {
+        id,
+        start: date,
+        end: date,
+        created_at: new Date(),
+        title: title,
+        type: type,
+        ...meta,
+      },
+    ])
+  }
+
   return (
     <div className="App">
-      <Navigator />
+      <Navigator 
+        createEvent={createEvent}
+      />
       <Calendar 
         events={events}
         removeEvent={removeEvent}

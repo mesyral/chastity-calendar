@@ -2,9 +2,9 @@ import { Calendar as RBC, momentLocalizer } from "react-big-calendar";
 import moment from "moment"
 import 'moment/locale/zh-tw'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import './Calendar.css'
 import { zhtw } from './locale/zh-tw'
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
+import './color.css'
 
 const localizer = momentLocalizer(moment)
 
@@ -20,17 +20,17 @@ export default function Calendar(props) {
 
       return {className: classes.join(' ')}
     },
-    [props.events]
+    []
   )
 
   const titleAccessor = useCallback(
     (event) => {
-      if (event.type === 'cum' && 'reason' in event)
+      if (event.type === 'cum' && 'reason' in event && event.reason !== '')
         return `${event.title}：${event.reason}`;
 
       return event.title
     },
-    [props.events]
+    []
   )
 
   return <RBC

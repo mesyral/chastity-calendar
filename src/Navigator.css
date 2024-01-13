@@ -1,0 +1,35 @@
+nav {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 0 5vw;
+}
+
+form {
+    flex: 1 1;
+}
+
+button {
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 1px;
+    margin-right: 1px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none
+}
+
+button:hover {
+    filter: brightness(.8)
+}
+
+input[type=date],input[type=text] {
+    border-radius: 5px;
+    border-width: 1px;
+    box-sizing: border-box;
+    margin: 8px 0;
+    padding: 12px 20px
+}

@@ -1,21 +1,22 @@
 .lock {
     text-align: center;
-}
-
-.locked {
+  }
+  
+  .locked {
     background-color: green;
-}
-
-.unlocked {
+  }
+  
+  .unlocked {
     background-color: crimson;
-}
-
-.cummed {
+  }
+  
+  .cummed {
     background-color: royalblue;
-}
-
-.retrospective {
+  }
+  
+  .retrospective {
     border-style: dashed;
     border-width: 2px;
     opacity: 0.5;
-}
+  }
+  
